@@ -1,3 +1,9 @@
+<?php
+session_start();
+include('db.php');
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -46,6 +52,20 @@
         </div>
     </div>
 </div>
+
+    <!-- Image Gallery Section -->
+    <div class="container">
+        <h2>Image Gallery</h2>
+        <div class="portfolio-items">
+                <div class="portfolio-item">
+                    <!-- Gambar dan deskripsi -->
+                    <img src="uploads/<?php echo $row['image']; ?>" alt="Image" />
+                    <p></p>
+                    <p><strong>Uploaded by:</strong></p>
+                    <a href="uploads/<?php echo $row['image']; ?>" download>Download</a>
+                </div>
+        </div>
+    </div>
 
     <!-- Footer -->
     <footer>
