@@ -5,6 +5,12 @@ include('db.php');
 // Ambil nama user yang login
 $user_name = $_SESSION['username'];  // Pastikan sudah ada dalam session
 
+// Proses pencarian gambar
+$search = isset($_GET['search']) ? $_GET['search'] : '';
+$sql = "SELECT * FROM image WHERE description LIKE '%$search%' AND uploaded_by = '$user_name'";
+$result = $conn->query($sql);
+?>
+
 ?>
 
 <!DOCTYPE html>
@@ -45,11 +51,13 @@ $user_name = $_SESSION['username'];  // Pastikan sudah ada dalam session
         
         <h2>Your Portfolio</h2>
         <div class="portfolio-items">
+            <?php while($row = $result->fetch_assoc()) { ?>
                 <div class="portfolio-item">
                     <!-- Pastikan path gambar benar -->
                     <img src="uploads/<?php echo $row['image']; ?>" alt="Image" width="300">
-                    <p></p>
+                    <p><?php echo $row['description']; ?></p>
                 </div>
+            <?php } ?>
         </div>
 
     </div>
