@@ -35,6 +35,44 @@ if (isset($_POST['add_user'])) {
     }
 }
 
+// Proses hapus user
+if (isset($_GET['delete_user'])) {
+    $user_id = $_GET['delete_user'];
+    $sql_delete_user = "DELETE FROM users WHERE id = '$user_id'";
+    if ($conn->query($sql_delete_user) === TRUE) {
+        echo "User deleted successfully!";
+    } else {
+        echo "Error: " . $conn->error;
+    }
+}
+
+// Proses hapus gambar dan file
+if (isset($_GET['delete_id'])) {
+    $image_id = $_GET['delete_id'];
+    
+    // Ambil nama file gambar dari database
+    $sql_get_image = "SELECT image FROM image WHERE id = '$image_id'";
+    $result_image = $conn->query($sql_get_image);
+    
+    if ($result_image->num_rows > 0) {
+        $row_image = $result_image->fetch_assoc();
+        $image_path = 'uploads/' . $row_image['image'];
+
+        // Hapus gambar dari folder uploads jika file ada
+        if (file_exists($image_path)) {
+            unlink($image_path);
+        }
+
+        // Hapus gambar dari database
+        $sql_delete_image = "DELETE FROM image WHERE id = '$image_id'";
+        if ($conn->query($sql_delete_image) === TRUE) {
+            echo "Image deleted successfully!";
+        } else {
+            echo "Error: " . $conn->error;
+        }
+    }
+}
+
 ?>
 
 <!DOCTYPE html>
