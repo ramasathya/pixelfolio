@@ -23,4 +23,12 @@
                 <a href="register.php" class="logbutton">Register</a>
         </div>
     </div>
+    
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 My Portfolio Website. All rights reserved.</p>
+    </footer>
+</body>
+</html>
+
 </body>

@@ -68,3 +68,26 @@ body {
     border-radius:3px;
     text-decoration:none;
 }
+
+.container {
+    width: 80%;
+    margin: 5% auto;
+    padding-top: 70px; /* Ruang untuk navbar fixed */
+}
+
+footer {
+    background-color: #333;
+    color: white;
+    padding: 20px;
+    text-align: center;
+    margin-top: 20px;
+}
+
+.logout-button {
+    background:red;
+    color:#ffffff;
+    font-size:15px;
+    padding:8px 12px;
+    border-radius:3px;
+    text-decoration:none;
+}
