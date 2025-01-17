@@ -28,7 +28,7 @@ $user_name = $_SESSION['username'];  // Pastikan sudah ada dalam session
         </div>
         <div class="loginbar">
         <span>Welcome, <?php echo $user_name; ?></span> <!-- Menampilkan nama user-->
-        <a href="" class="logout-button">Logout</a> <!-- Logout button -->
+        <a href="logout.php" class="logout-button">Logout</a> <!-- Logout button -->
         </div>
     </div>
 
