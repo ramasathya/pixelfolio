@@ -1,3 +1,9 @@
+<?php
+session_start();
+include('db.php');
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -33,7 +39,16 @@
                 <button type="submit">Upload</button>
             </form>
         </div>
+        
+        <h2>Your Portfolio</h2>
+        <div class="portfolio-items">
+                <div class="portfolio-item">
+                    <!-- Pastikan path gambar benar -->
+                    <img src="uploads/<?php echo $row['image']; ?>" alt="Image" width="300">
+                    <p></p>
+                </div>
         </div>
+
     </div>
 
     <!-- Footer -->
