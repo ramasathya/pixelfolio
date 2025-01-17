@@ -137,13 +137,6 @@ if (isset($_GET['delete_id'])) {
                         </tr>
                     <?php } ?>
                 </thead>
-                <tbody>
-                        <tr>
-                            <td></td>
-                            <td></td>
-                            <td><a href="">Delete</a></td>
-                        </tr>
-                </tbody>
             </table>
         </div>
 
