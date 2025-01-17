@@ -91,11 +91,13 @@ if (isset($_POST['add_user'])) {
             <h3>Existing Users</h3>
             <table>
                 <thead>
-                    <tr>
-                        <th>Username</th>
-                        <th>Role</th>
-                        <th>Action</th>
-                    </tr>
+                    <?php while ($row = $result_search->fetch_assoc()) { ?>
+                        <tr>
+                            <td><?php echo $row['username']; ?></td>
+                            <td><?php echo $row['role']; ?></td>
+                            <td><a href="admin_dashboard.php?delete_user=<?php echo $row['id']; ?>">Delete</a></td>
+                        </tr>
+                    <?php } ?>
                 </thead>
                 <tbody>
                         <tr>
@@ -120,15 +122,24 @@ if (isset($_POST['add_user'])) {
                     </tr>
                 </thead>
                 <tbody>
+                <?php while ($row = $result_uploads->fetch_assoc()) { ?>
                         <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
+                            <td><?php echo ucfirst($row['uploaded_by']); ?></td>
+                            <td><?php echo $row['description']; ?></td>
+                            <td>
+                                <!-- Menampilkan gambar -->
+                                <?php if (!empty($row['image']) && file_exists('uploads/' . $row['image'])) { ?>
+                                    <img src="uploads/<?php echo $row['image']; ?>" alt="Upload" width="100">
+                                <?php } else { ?>
+                                    <p>No image available</p>
+                                <?php } ?>
+                            </td>
                             <td>
                                 <!-- Tombol Delete -->
-                                <a href="">Delete</a>
+                                <a href="admin_dashboard.php?delete_id=<?php echo $row['id']; ?>" onclick="return confirm('Are you sure you want to delete this image?');">Delete</a>
                             </td>
                         </tr>
+                    <?php } ?>
                 </tbody>
             </table>
         </div>
