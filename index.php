@@ -2,6 +2,12 @@
 session_start();
 include('db.php');
 
+
+// Proses pencarian gambar berdasarkan deskripsi
+$search = isset($_GET['search']) ? $_GET['search'] : '';
+$sql_search = "SELECT * FROM image WHERE description LIKE '%$search%'";
+$result_search = $conn->query($sql_search);
+
 ?>
 
 <!DOCTYPE html>
@@ -57,13 +63,15 @@ include('db.php');
     <div class="container">
         <h2>Image Gallery</h2>
         <div class="portfolio-items">
+            <?php while ($row = $result_search->fetch_assoc()) { ?>
                 <div class="portfolio-item">
                     <!-- Gambar dan deskripsi -->
                     <img src="uploads/<?php echo $row['image']; ?>" alt="Image" />
-                    <p></p>
-                    <p><strong>Uploaded by:</strong></p>
+                    <p><?php echo $row['description']; ?></p>
+                    <p><strong>Uploaded by:</strong> <?php echo $row['uploaded_by']; ?></p>
                     <a href="uploads/<?php echo $row['image']; ?>" download>Download</a>
                 </div>
+            <?php } ?>
         </div>
     </div>
 
