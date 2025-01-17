@@ -31,8 +31,15 @@ $result_search = $conn->query($sql_search);
             </form>
         </div>
         <div class="loginbar">
+            <?php if (isset($_SESSION['user_id'])) { ?>
+                <!-- Jika sudah login -->
+                <a href="home.php" class="user-name"><?php echo $_SESSION['username']; ?></a>
+                <a href="logout.php" class="logout-button">Logout</a>
+            <?php } else { ?>
+                <!-- Jika belum login -->
                 <a href="login.php" class="logbutton">Login</a>
                 <a href="register.php" class="logbutton">Register</a>
+            <?php } ?>
         </div>
     </div>
 
