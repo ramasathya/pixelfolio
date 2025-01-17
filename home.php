@@ -15,6 +15,35 @@ $user_name = $_SESSION['username'];  // Pastikan sudah ada dalam session
 $search = isset($_GET['search']) ? $_GET['search'] : '';
 $sql = "SELECT * FROM image WHERE description LIKE '%$search%' AND uploaded_by = '$user_name'";
 $result = $conn->query($sql);
+
+// Proses penghapusan gambar
+if (isset($_GET['delete_id'])) {
+    $delete_id = $_GET['delete_id'];
+    // Ambil nama file gambar yang akan dihapus
+    $delete_query = "SELECT image FROM image WHERE id = '$delete_id' AND uploaded_by = '$user_name'";
+    $delete_result = $conn->query($delete_query);
+
+    if ($delete_result->num_rows > 0) {
+        $row = $delete_result->fetch_assoc();
+        $image_name = $row['image'];
+
+        // Hapus file gambar dari folder uploads
+        $image_path = 'uploads/' . $image_name;
+        if (file_exists($image_path)) {
+            unlink($image_path);
+        }
+
+        // Hapus data gambar dari database
+        $delete_sql = "DELETE FROM image WHERE id = '$delete_id' AND uploaded_by = '$user_name'";
+        if ($conn->query($delete_sql)) {
+            header("Location: home.php"); // Redirect ke halaman home setelah menghapus gambar
+            exit();
+        } else {
+            echo "Error deleting image from database: " . $conn->error;
+        }
+    }
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -60,6 +89,7 @@ $result = $conn->query($sql);
                     <!-- Pastikan path gambar benar -->
                     <img src="uploads/<?php echo $row['image']; ?>" alt="Image" width="300">
                     <p><?php echo $row['description']; ?></p>
+                    <a href="home.php?delete_id=<?php echo $row['id']; ?>" class="delete-button">Delete</a>
                 </div>
             <?php } ?>
         </div>
