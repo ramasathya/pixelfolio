@@ -159,3 +159,10 @@ button[name="add_user"] {
     transition: background-color 0.3s ease;
 }
 
+.upload-section button {
+    padding: 10px 20px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
