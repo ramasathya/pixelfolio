@@ -2,6 +2,12 @@
 session_start();
 include('db.php');
 
+// Pastikan user sudah login
+if (!isset($_SESSION['user_id'])) {
+    header('Location: login.php');
+    exit();
+}
+
 // Ambil nama user yang login
 $user_name = $_SESSION['username'];  // Pastikan sudah ada dalam session
 
@@ -40,7 +46,7 @@ $result = $conn->query($sql);
         <!-- Form untuk upload gambar -->
         <h2>Upload Your Portfolio</h2>
         <div class="upload-section">
-            <form action="upload.php" method="POST">
+            <form action="upload.php" method="POST" enctype="multipart/form-data">
                 <input type="text" name="description" placeholder="Enter description" required>
                 <input type="file" name="image" required>
                 <button type="submit">Upload</button>
