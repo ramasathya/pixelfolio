@@ -2,6 +2,9 @@
 session_start();
 include('db.php');
 
+// Ambil nama user yang login
+$user_name = $_SESSION['username'];  // Pastikan sudah ada dalam session
+
 ?>
 
 <!DOCTYPE html>
@@ -24,7 +27,7 @@ include('db.php');
             </form>
         </div>
         <div class="loginbar">
-        <span>Welcome,
+        <span>Welcome, <?php echo $user_name; ?></span> <!-- Menampilkan nama user-->
         <a href="" class="logout-button">Logout</a> <!-- Logout button -->
         </div>
     </div>
