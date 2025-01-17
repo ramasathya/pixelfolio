@@ -19,6 +19,22 @@ $search = isset($_GET['search']) ? $_GET['search'] : '';
 $sql_search = "SELECT * FROM users WHERE username LIKE '%$search%'";
 $result_search = $conn->query($sql_search);
 
+// Proses menambah user
+if (isset($_POST['add_user'])) {
+    $username = $_POST['username'];
+    $password = $_POST['password'];
+    $role = $_POST['role'];
+
+    $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+
+    $sql_add_user = "INSERT INTO users (username, password, role) VALUES ('$username', '$hashed_password', '$role')";
+    if ($conn->query($sql_add_user) === TRUE) {
+        echo "User added successfully!";
+    } else {
+        echo "Error: " . $conn->error;
+    }
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -43,7 +59,7 @@ $result_search = $conn->query($sql_search);
             </form>
         </div>
         <div class="loginbar">
-        <a href="" class="logout-button">Logout</a>
+        <a href="logout.php" class="logout-button">Logout</a>
         </div>    
         </div>
 
