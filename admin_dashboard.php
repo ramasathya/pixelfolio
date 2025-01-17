@@ -14,6 +14,11 @@ $sql_uploads = "SELECT users.username, image.description, image.image, image.upl
                 JOIN users ON image.uploaded_by = users.username";
 $result_uploads = $conn->query($sql_uploads);
 
+// Proses search user
+$search = isset($_GET['search']) ? $_GET['search'] : '';
+$sql_search = "SELECT * FROM users WHERE username LIKE '%$search%'";
+$result_search = $conn->query($sql_search);
+
 ?>
 
 <!DOCTYPE html>
@@ -33,7 +38,7 @@ $result_uploads = $conn->query($sql_uploads);
             <!-- Search Users Section -->
         <div class="search-form">
             <form method="GET" action="admin_dashboard.php">
-                <input type="text" name="search" placeholder="Search User">
+                <input type="text" name="search" placeholder="Search User" value="<?php echo $search; ?>">
                 <button type="submit" class="search-button">Search</button>
             </form>
         </div>
