@@ -1,3 +1,41 @@
+<?php
+session_start();
+include('db.php');
+
+// Cek apakah form login telah disubmit
+if (isset($_POST['login'])) {
+    $username = $_POST['username'];
+    $password = $_POST['password'];
+
+    // Query untuk mencari user berdasarkan username
+    $sql = "SELECT * FROM users WHERE username = '$username'";
+    $result = $conn->query($sql);
+
+    if ($result->num_rows > 0) {
+        // User ditemukan, cek password
+        $row = $result->fetch_assoc();
+        if (password_verify($password, $row['password'])) {
+            // Password benar, set session dan redirect berdasarkan role
+            $_SESSION['user_id'] = $row['id'];
+            $_SESSION['username'] = $row['username'];
+            $_SESSION['role'] = $row['role']; // Menyimpan role di session
+            
+            // Redirect berdasarkan role
+            if ($row['role'] == 'admin') {
+                header('Location: admin_dashboard.php'); // Arahkan ke halaman admin_dashboard.php untuk admin
+            } else {
+                header('Location: home.php'); // Arahkan ke halaman home untuk user biasa
+            }
+            exit();
+        } else {
+            $error = "Password salah!";
+        }
+    } else {
+        $error = "Username tidak ditemukan!";
+    }
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
