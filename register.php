@@ -1,3 +1,31 @@
+<?php
+session_start();
+include('db.php');
+
+// Cek apakah form register telah disubmit
+if (isset($_POST['register'])) {
+    $username = $_POST['username'];
+    $password = $_POST['password'];
+    $confirm_password = $_POST['confirm_password'];
+
+    if ($password === $confirm_password) {
+        // Hash password
+        $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+        
+        // Insert ke database
+        $sql_register = "INSERT INTO users (username, password, role) VALUES ('$username', '$hashed_password', 'user')";
+        if ($conn->query($sql_register) === TRUE) {
+            header('Location: login.php'); // Redirect ke halaman login setelah berhasil
+            exit();
+        } else {
+            $error = "Error: " . $conn->error;
+        }
+    } else {
+        $error = "Passwords do not match!";
+    }
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
