@@ -64,6 +64,8 @@ if (isset($_POST['login'])) {
             <a class="back" href="index.php">Back</a>
         </form>
 
+        <?php if (isset($error)) { echo "<p class='error-message'>$error</p>"; } ?>
+        
     </div>
 
 </body>

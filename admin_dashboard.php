@@ -1,3 +1,21 @@
+<?php
+session_start();
+include('db.php');
+
+//jika login role admin akan kesini
+if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'admin') {
+    header('Location: login.php');
+    exit();
+}
+
+// Menampilkan gambar upload user dan admin
+$sql_uploads = "SELECT users.username, image.description, image.image, image.uploaded_by, image.id
+                FROM image 
+                JOIN users ON image.uploaded_by = users.username";
+$result_uploads = $conn->query($sql_uploads);
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
