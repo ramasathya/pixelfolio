@@ -11,8 +11,6 @@ $sql = "SELECT * FROM image WHERE description LIKE '%$search%' AND uploaded_by =
 $result = $conn->query($sql);
 ?>
 
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
