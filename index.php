@@ -23,11 +23,36 @@
                 <a href="register.php" class="logbutton">Register</a>
         </div>
     </div>
-    
+
+        <!-- welcome -->
+        <div class="welcome">
+    <div class="carousel-container">
+        <!-- Carousel -->
+        <div class="carousel">
+            <div class="carousel-slide">
+                <img src="images/slide1.png" alt="Slide 1">
+            </div>
+            <div class="carousel-slide">
+                <img src="images/slide2.png" alt="Slide 2">
+            </div>
+            <div class="carousel-slide">
+                <img src="images/slide3.png" alt="Slide 3">
+            </div>
+        </div>
+        <!-- Text Overlay -->
+        <div class="carousel-text">
+            <h1>PIXELFOLIO</h1>
+            <p>Find Picture Suited For You</p>
+        </div>
+    </div>
+</div>
+
     <!-- Footer -->
     <footer>
         <p>&copy; 2025 My Portfolio Website. All rights reserved.</p>
     </footer>
+
+    <script src="javascript/script.js"></script>
 </body>
 </html>
 
